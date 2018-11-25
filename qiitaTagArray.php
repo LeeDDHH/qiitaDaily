@@ -2001,5 +2001,3 @@ $qiitaTagArray = array(
     "myMemo",
     "NativeScript",
 );
-
-?>

@@ -1,7 +1,15 @@
 <?php
-require_once('./Common.php');
+require_once './Common.php';
 //qiitaのapiから記事の情報を取得
-function getArticleInfo($arg) :stdClass{
+
+/**
+ * Undocumented function
+ *
+ * @param string $arg
+ * @return stdClass
+ */
+function getArticleInfo(string $arg): stdClass
+{
     // curlの初期化
     $ch = curl_init();
 
@@ -27,23 +35,41 @@ function getArticleInfo($arg) :stdClass{
     // curlを閉じる
     curl_close($ch);
     // json文字列をデコード
-    $data = json_decode($json);
-    return $data;
+    return json_decode($json);
 }
 
+/**
+ * Undocumented function
+ *
+ * @param string $url
+ * @return string
+ */
 //urlからhtmlそのままクローリング
-function getArticleHTML($url) :string {
+function getArticleHTML(string $url): string
+{
     //ユーザーエージェントを記載
     $options = array(
-    'https' => array(
-        'method' => 'GET',
-        'header' => USERAGENT,
-    ),
+        'https' => array(
+            'method' => 'GET',
+            'header' => USERAGENT,
+        ),
     );
     $context = stream_context_create($options);
 
     //htmlを持ってきて文字列にする
-    $articleFile = file_get_contents($url,false, $context);
-    return $articleFile;
+    return file_get_contents($url, false, $context);
 }
-?>
+
+/**
+ * Undocumented function
+ *
+ * @param string $url
+ * @return string
+ */
+function convertURL2QiitaParameter(string $url): string
+{
+    // 使用するURL
+    preg_match('/https:\/\/qiita.com\/([a-zA-Z0-9\/"\'_<>\（\）\(\)=\n\r !+\-#.]*)\/items\/([a-zA-Z0-9]*)/', $url, $arg);
+
+    return 'https://qiita.com/api/v2/items/' . $arg[2];
+}
