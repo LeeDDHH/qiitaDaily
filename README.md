@@ -25,7 +25,7 @@ sh qiitaDaily.sh
 ### 補足
 qiitaDaily.shに指定されたsleepの値は少なくとも1以上にしておいてください。
 
-###181227
+### 181227
 必要最低限の情報をまとめるためにテンプレートとCSSを追加しました。
 
 - 追加：　template.html, style-8140ff048d203c2f3495c80fc4aea450.min.css
