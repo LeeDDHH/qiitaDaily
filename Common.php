@@ -10,3 +10,6 @@ define('NOTITLE','無題の投稿');//デフォルトの投稿ファイル名
 define('NOCLASS','noClass/');//デフォルトのカテゴリ名
 define('USERAGENT','User-Agent: Bot/1.0 () ');//userAgentを指定 ex)User-Agent: Bot/1.0 (◯◯Bot; rev.20181108; ◯◯@gmail.com)
 define('ACCESSTOKEN',"");//qiitaの開発者向けのアクセストークンを入れてください
+define('TEMPLATE', '/template.html');//書き出し用テンプレート
+define('CSSFILE', '/style-8140ff048d203c2f3495c80fc4aea450.min.css');//書き出しの様式を整えるためのcss先 ex)../../../../sh/getQiitaDaily/style-8140ff048d203c2f3495c80fc4aea450.min.css
+define('REPLACE_SYMBOL', '%%');//テンプレートへ変換する文字列の区切り文字

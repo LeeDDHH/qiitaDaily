@@ -9,6 +9,7 @@ $categorizeTagsArray = [];
 $noKeywordArray = [];
 $largeClass = NOCLASS;
 $subKeyword = '';
+$replaceArray = [];
 
 $url = $argv[1];
 
@@ -17,8 +18,14 @@ $apiSearch = convertURL2QiitaParameter($url);
 //qiitaのapiから記事の情報を取得
 $data = getArticleInfo($apiSearch);
 
-$title = $data->title;
-$tags = $data->tags;
+$replaceArray['USER_ID'] = $data->user->id;
+$title = $replaceArray['TITLE'] = $data->title;
+$tags = $replaceArray['TAGS'] = $data->tags;
+$replaceArray['RENDERED_BODY'] = $data->rendered_body;
+$replaceArray['CSSFILE'] = CSSFILE;
+
+//タイトルに/があるとディレクトリの区切りとして認識するため、&に変更
+$title = str_replace('/', '&', $title);
 
 if (!empty($tags))
 {

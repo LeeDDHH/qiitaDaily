@@ -73,3 +73,39 @@ function convertURL2QiitaParameter(string $url): string
 
     return 'https://qiita.com/api/v2/items/' . $arg[2];
 }
+
+/**
+ * Undocumented function
+ *
+ * @param array $array
+ * @return string
+ */
+function convertTemplate(array $array): string
+{
+    $contentsReplaceArray = [];
+    $contentsIndexArray = ['USER_ID','TITLE','TAGS','RENDERED_BODY','CSSFILE'];
+    $contents = file_get_contents(dirname ( __FILE__ ) . TEMPLATE);
+    foreach($array as $k => $v)
+    {
+        switch($k)
+        {
+            case 'TAGS':
+                foreach($array['TAGS'] as $k => $v)
+                {
+                    $tags .= '<a class="it-Tags_item" href="/tags/' . $v->name . '"><span>' . $v->name . '</span></a>';
+                }
+                $contentsReplaceArray['TAGS'] = $tags;
+                break;
+
+            default:
+                $contentsReplaceArray[$k] = $array[$k];
+                break;
+        }
+    }
+
+    foreach ($contentsReplaceArray as $key=>$val)
+    {
+        $contents = str_replace(REPLACE_SYMBOL . $key . REPLACE_SYMBOL, $val, $contents);
+    }
+    return $contents;
+}
